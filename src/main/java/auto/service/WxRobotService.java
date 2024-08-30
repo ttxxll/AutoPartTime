@@ -31,7 +31,7 @@ import java.util.Map;
 @Slf4j
 public class WxRobotService {
 
-    private final static String URL_SEND = "http://127.0.0.1:8090/send";
+    private final static String URL_SEND = "https://officially-talented-kitten.ngrok-free.app/send";
 
     private final RateLimiter rateLimiter = RateLimiter.create(50);
 
