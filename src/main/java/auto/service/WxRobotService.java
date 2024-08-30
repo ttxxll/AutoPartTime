@@ -33,7 +33,7 @@ public class WxRobotService {
 
     private final static String URL_SEND = "http://127.0.0.1:8090/send";
 
-    private final RateLimiter rateLimiter = RateLimiter.create(100);
+    private final RateLimiter rateLimiter = RateLimiter.create(50);
 
     @Autowired
     private RestTemplate restTemplate;
