@@ -1,0 +1,20 @@
+server:
+  port: 8900
+
+# 数据源配置
+spring:
+  application:
+    name: AutoPartTime
+  datasource:
+    url: jdbc:mysql://localhost:3306/auto-parttime-job?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+    username: root  # 数据库用户名
+    password: root  # 数据库密码
+    driver-class-name: com.mysql.cj.jdbc.Driver  # 数据库驱动类名
+
+
+#sms短信配置
+sms:
+  app-code: 86deba2ccedd415882ac15010e98ce8d
+  template-id: JM1000372
+  app-key: 204575450
+  app-secret: bkvG5bx8QztuiKwRZMxL2XHNFseAtzVM
