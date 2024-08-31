@@ -4,6 +4,7 @@ import auto.common.BaseResult;
 import auto.controller.request.ProductCardInviteLinkPageReq;
 import auto.dao.ProductCardInviteLinkDao;
 import auto.model.ProductCardInviteLink;
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,5 +72,30 @@ public class ProductCardInviteLinkService {
             return false;
         }
         return true;
+    }
+
+    public void export(ProductCardInviteLinkPageReq pageReq, HttpServletResponse response) {
+        QueryWrapper<ProductCardInviteLink> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotBlank(pageReq.getId())) {
+            queryWrapper.eq("id", pageReq.getId());
+        }
+        if (StringUtils.isNotBlank(pageReq.getStatus())) {
+            queryWrapper.eq("status", pageReq.getStatus());
+        }
+        List<ProductCardInviteLink> data = productCardInviteLinkDao.selectList(queryWrapper);
+
+        // 设置响应头
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+        response.setHeader("Content-disposition", "attachment;filename=卡密.xlsx");
+
+        // 使用 EasyExcel 写入数据到输出流
+        try {
+            EasyExcel.write(response.getOutputStream(), ProductCardInviteLink.class)
+                    .sheet("卡密")
+                    .doWrite(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

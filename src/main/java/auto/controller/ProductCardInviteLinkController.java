@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -44,8 +45,17 @@ public class ProductCardInviteLinkController {
             BaseResult result = productCardInviteLinkService.upload(file);
             return result;
         } catch (Exception e) {
-            log.error("ProductCardInviteLinkController page error!", e);
+            log.error("ProductCardInviteLinkController upload error!", e);
             return BaseResult.buildError(e.getMessage());
+        }
+    }
+
+    @PostMapping("/export")
+    public void export(@RequestBody ProductCardInviteLinkPageReq pageReq, HttpServletResponse response) {
+        try {
+            productCardInviteLinkService.export(pageReq, response);
+        } catch (Exception e) {
+            log.error("ProductCardInviteLinkController export error!", e);
         }
     }
 
