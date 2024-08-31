@@ -4,6 +4,8 @@ public interface WxID {
 
     public static final String TXL = "wxid_vihh4ys4qfqw21";
 
+    public static final String TXL_2 = "wxid_7p6x6fdgfwzm22";
+
     public static final String YYL = "xx6253609";
 
     public static final String ZDR = "wxid_jicggwfhxdl922";

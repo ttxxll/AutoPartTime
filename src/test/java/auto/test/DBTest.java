@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author taoxinglong
@@ -32,6 +33,16 @@ public class DBTest {
         List<ProductCardInviteLink> list =  productCardInviteLinkDao.selectList(
                 new QueryWrapper<ProductCardInviteLink>().eq("id", "adasdasdas"));
         log.info(JSONObject.toJSONString(list));
+    }
+
+    @Test
+    public void testInsertDB() {
+        for (int i = 0; i < 10; i++) {
+            ProductCardInviteLink inviteLink = new ProductCardInviteLink();
+            inviteLink.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+            inviteLink.setStatus(1);
+            int insert = productCardInviteLinkDao.insert(inviteLink);
+        }
     }
 
 }

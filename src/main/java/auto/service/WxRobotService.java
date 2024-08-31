@@ -24,14 +24,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by andy QQ 1525555556 on 2020/02/13
- */
 @Service
 @Slf4j
 public class WxRobotService {
 
-    private final static String URL_SEND = "https://officially-talented-kitten.ngrok-free.app/send";
+    private final static String URL_SEND = "http://officially-talented-kitten.ngrok-free.app/send";
 
     private final RateLimiter rateLimiter = RateLimiter.create(50);
 

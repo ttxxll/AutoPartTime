@@ -16,7 +16,7 @@
         <file>${LOG_FILE}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件命名格式，包含日期和时间 -->
-            <fileNamePattern>${LOG_HOME}/app.%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/app.%d{yyyy-MM-dd_HH}.%i.log</fileNamePattern>
             <!-- 滚动策略：每100MB滚动一次 -->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
@@ -33,7 +33,7 @@
         <file>${ERROR_LOG_FILE}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 错误日志文件命名格式，包含日期和时间 -->
-            <fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd_HH}.%i.log</fileNamePattern>
             <!-- 滚动策略：每100MB滚动一次 -->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
