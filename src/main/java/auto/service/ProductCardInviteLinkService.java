@@ -82,8 +82,8 @@ public class ProductCardInviteLinkService {
         if (StringUtils.isNotBlank(pageReq.getStatus())) {
             queryWrapper.eq("status", pageReq.getStatus());
         }
-        List<ProductCardInviteLink> data = productCardInviteLinkDao.selectList(queryWrapper);
-
+        List<ProductCardInviteLink> data = productCardInviteLinkDao.selectList(queryWrapper.orderByAsc("update_time"));
+        data.forEach(obj -> obj.setId("http://122.51.106.147/?card="+obj.getId()));
         // 设置响应头
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");

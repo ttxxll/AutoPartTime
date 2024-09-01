@@ -51,7 +51,7 @@ public class WxRobotService {
             boolean acquire = rateLimiter.tryAcquire();
             if (!acquire) {
                 log.error("sendTextMsg 流量触发阈值！");
-                Map<String, String> alertBody = buildMsgBody(EventType.SendTextMsg, WxID.YYL, WxID.TXL, "流量触发阈值！");
+                Map<String, String> alertBody = buildMsgBody(EventType.SendTextMsg, WxID.YYL_ROBOT, WxID.TXL, "流量触发阈值！");
                 restTemplate.exchange(URL_SEND, HttpMethod.POST, new HttpEntity<>(alertBody), String.class);
                 return BaseResult.buildError("流量触发阈值，请检查重试！");
             }
@@ -71,12 +71,12 @@ public class WxRobotService {
             if (response.getStatusCodeValue() != 200) {
                 log.error("sendTextMsg failed!: {}", JSONObject.toJSONString(response.getBody()));
                 // 再发送一次
-                response = restTemplate.exchange(URL_SEND, HttpMethod.POST, entity, String.class);
-                if (response.getStatusCodeValue() != 200) {
-                    // 还是不行 短信告警
-                    smsService.send("18375324908", smsConfig.getTemplateId(),"000000");
-                    return BaseResult.buildError("Wx消息发送失败！");
-                }
+//                response = restTemplate.exchange(URL_SEND, HttpMethod.POST, entity, String.class);
+//                if (response.getStatusCodeValue() != 200) {
+//                    // 还是不行 短信告警
+//                    smsService.send("18375324908", smsConfig.getTemplateId(),"000000");
+//                    return BaseResult.buildError("Wx消息发送失败！");
+//                }
             }
             log.info("sendTextMsg success! param = {}, res = {}", JSONObject.toJSONString(event), JSONObject.toJSONString(response.getBody()));
 
@@ -88,7 +88,7 @@ public class WxRobotService {
                     set("update_time", new Date()));
             // 更新失败：WX提醒
             if (update != 1) {
-                Map<String, String> alertBody = buildMsgBody(EventType.SendTextMsg, WxID.YYL, WxID.TXL, "数据库更新失败！表：product_card_invite_link，id：" + event.getCardPwd());
+                Map<String, String> alertBody = buildMsgBody(EventType.SendTextMsg, WxID.YYL_ROBOT, WxID.TXL, "数据库更新失败！表：product_card_invite_link，id：" + event.getCardPwd());
                 restTemplate.exchange(URL_SEND, HttpMethod.POST, new HttpEntity<>(alertBody), String.class);
                 log.error("update productCardInviteLink fail! inviteLink : {}", event.getCardPwd());
             }
